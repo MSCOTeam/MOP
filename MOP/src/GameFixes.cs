@@ -24,6 +24,7 @@ namespace MOP
 {
     class GameFixes : MonoBehaviour
     {
+        //some little things have been disabled if player ever tries to load satsuma in msco , had to disable some things (in testing player died and lost savegame) , if i find any more errors in mp i'll disable more satsuma related things
         // This class fixes shit done by ToplessGun.
         // Also some caused by MOP itself...
 
@@ -57,10 +58,10 @@ namespace MOP
             GameObject fiberHood = Resources.FindObjectsOfTypeAll<GameObject>()
                 .First(obj => obj.name == "fiberglass hood(Clone)"
                 && obj.GetComponent<PlayMakerFSM>() != null
-                && obj.GetComponent<MeshCollider>() != null);
+                && obj.GetComponent<MeshCollider>() != null); //this is fine for now doesn't need to be disabled , i'll test it later
 
-            int retries = 0;
-            if (MopFsmManager.IsStockHoodBolted() && hood.parent != hoodPivot)
+            /*int retries = 0;
+            if (MopFsmManager.IsStockHoodBolted() && hood.parent != hoodPivot)        
             {
                 hood.gameObject.SetActive(true);
 
@@ -83,11 +84,11 @@ namespace MOP
                         break;
                     }
                 }
-            }
+            }*/
 
-            hoodFixedUpdate.StartFixedUpdate();
+            /*hoodFixedUpdate.StartFixedUpdate();  breaks mp completely if someone tries to load a save with satsuma even though they are not supposed to
 
-            if (fiberHood != null && MopFsmManager.IsFiberHoodBolted() && fiberHood.transform.parent != hoodPivot)
+            if (fiberHood != null && MopFsmManager.IsFiberHoodBolted() && fiberHood.transform.parent != hoodPivot) 
             {
                 retries = 0;
                 while (fiberHood.transform.parent != hoodPivot)
@@ -110,7 +111,7 @@ namespace MOP
                         break;
                     }
                 }
-            }
+            }*/
 
             hood.gameObject.AddComponent<SatsumaBoltsAntiReload>();
             fiberHood.gameObject.AddComponent<SatsumaBoltsAntiReload>();
@@ -208,12 +209,12 @@ namespace MOP
             kekmetTrailerRemove.SetActive(false);
         }
 
-        public void RearBumperFix(GameObject triggerBumper, GameObject bumper)
+        /*public void RearBumperFix(GameObject triggerBumper, GameObject bumper)
         {
             StartCoroutine(RearBumperCoroutine(triggerBumper, bumper));
-        }
+        }*/
 
-        IEnumerator RearBumperCoroutine(GameObject triggerBumper, GameObject bumper)
+        /*IEnumerator RearBumperCoroutine(GameObject triggerBumper, GameObject bumper)
         {
             yield return new WaitForSeconds(2);
             triggerBumper.GetComponent<PlayMakerFSM>().SendEvent("ASSEMBLE");
@@ -235,6 +236,6 @@ namespace MOP
 
             bumper.GetComponent<ItemHook>().enabled = true;
             RearBumperFixDone = true;
-        }
+        }*/
     }
 }
